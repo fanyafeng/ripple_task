@@ -78,36 +78,23 @@ publishing {
         }
     }
 }
-
-def getBintrayUserProperty() {
-    return hasProperty('BINTRAY_USER') ? BINTRAY_USER : ""
-}
-
-def getBintrayApiKeyProperty() {
-    return hasProperty('BINTRAY_APIKEY') ? BINTRAY_APIKEY : ""
-}
-
 //def getGpgPassphraseProperty() {
 //    Properties properties = new Properties()//先要读取local.properties中的name和key
 //    properties.load(project.rootProject.file('local.properties').newDataInputStream())
 //    return properties.getProperty('GPG_PASSPHRASE') ? GPG_PASSPHRASE : ""
 //}
 
-def getUserTokenProperty() {
-    return hasProperty('USERTOKEN') ? USERTOKEN : ""
-}
-
-def getUserPasswordProperty() {
-    return hasProperty('USERPASSWORD') ? USERPASSWORD : ""
-}
-
 // gradle bintrayUpload
 bintray {
-    user = getBintrayUserProperty()
-    key = getBintrayApiKeyProperty()
+    Properties properties = new Properties()
+    InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+    properties.load(inputStream)
+
+    user = properties.getProperty("BINTRAY_USER")
+    key = properties.getProperty("BINTRAY_APIKEY")
     def passphrase = ""
-    def userToken = getUserTokenProperty()
-    def userPassword = getUserPasswordProperty()
+    def userToken = properties.getProperty("USERTOKEN")
+    def userPassword = properties.getProperty("USERPASSWORD")
     publications = ['mavenJava']
 
     dryRun = false
