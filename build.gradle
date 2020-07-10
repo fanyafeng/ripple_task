@@ -9,8 +9,8 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 29
+        minSdkVersion min_sdk_version
+        targetSdkVersion max_sdk_version
         versionCode 1
         versionName "1.0"
 
@@ -35,6 +35,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+//    implementation project(path: ':ripple_tool')
+    implementation 'com.ripple.component:tool:0.0.7'
+//    implementation project(path: ':ripple_log')
+    implementation 'com.ripple.component:log:0.0.2'
 }
 
 apply from: './gradle-jcenter-push.gradle'

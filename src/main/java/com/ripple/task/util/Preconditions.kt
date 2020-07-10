@@ -1,5 +1,7 @@
 package com.ripple.task.util
 
+import com.ripple.tool.judge.checkNotNullRipple
+
 /**
  * Author: fanyafeng
  * Data: 2020/3/6 18:10
@@ -13,19 +15,7 @@ object Preconditions {
      */
     @JvmStatic
     @JvmOverloads
-    fun <T> checkNotNull(reference: T?, errorMessage: Any = "引用对象为空"): T {
-        if (reference == null) {
-            throw NullPointerException(errorMessage.toString())
-        }
-        return reference
-    }
-
-
-    @JvmStatic
-    fun <T> checkArgument(expression: Boolean, errorMessage: Any) {
-        if (!expression) {
-            throw IllegalArgumentException(errorMessage.toString())
-        }
-    }
+    fun <T> checkNotNull(reference: T?, errorMessage: Any = "引用对象为空"): T =
+        checkNotNullRipple(reference, errorMessage)
 
 }

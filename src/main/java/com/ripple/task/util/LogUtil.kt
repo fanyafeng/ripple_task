@@ -1,6 +1,8 @@
 package com.ripple.task.util
 
 import android.util.Log
+import com.ripple.log.extend.logD
+import com.ripple.task.BuildConfig
 
 /**
  * Author: fanyafeng
@@ -10,13 +12,11 @@ import android.util.Log
  */
 object LogUtil {
 
-    private const val isDebug = true
-
     @JvmOverloads
     @JvmStatic
     fun d(tag: String = "logger d:", msg: String) {
-        if (isDebug) {
-            Log.d(tag, msg)
+        if (BuildConfig.DEBUG) {
+            logD(msg, tag)
         }
     }
 

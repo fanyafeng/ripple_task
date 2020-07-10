@@ -4,9 +4,9 @@ import com.ripple.task.callback.result.OnAllResult
 import com.ripple.task.callback.result.OnItemResult
 import com.ripple.task.config.ProcessModel
 import com.ripple.task.engine.ProcessEngine
-import com.ripple.task.lambda.PairLambda
-import com.ripple.task.lambda.SuccessLambda
 import com.ripple.task.task.impl.ProcessTaskImpl
+import com.ripple.tool.kttypelians.PairLambda
+import com.ripple.tool.kttypelians.SuccessLambda
 
 /**
  * Author: fanyafeng
@@ -69,7 +69,8 @@ class HandleTaskExtra<S, T>(processEngine: ProcessEngine, processList: List<Proc
     private var doingLambda: SuccessLambda<List<ProcessModel<S, T>>?> = null
     private var failedLambda: SuccessLambda<List<ProcessModel<S, T>>?> = null
     private var successLambda: SuccessLambda<List<ProcessModel<S, T>>?> = null
-    private var finishLambda: PairLambda<List<ProcessModel<S, T>>?> = null
+    private var finishLambda: PairLambda<List<ProcessModel<S, T>>?, List<ProcessModel<S, T>>?> =
+        null
 
     private val engine = ProcessTaskImpl<S, T>(processEngine)
 
@@ -178,7 +179,7 @@ class HandleTaskExtra<S, T>(processEngine: ProcessEngine, processList: List<Proc
     }
 
     fun onFinish(
-        finishLambda: PairLambda<List<ProcessModel<S, T>>?>
+        finishLambda: PairLambda<List<ProcessModel<S, T>>?, List<ProcessModel<S, T>>?>
     ) {
         this.finishLambda = finishLambda
     }
