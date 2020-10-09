@@ -5,6 +5,7 @@ import com.ripple.task.callback.result.OnItemResult
 import com.ripple.task.config.ProcessModel
 import com.ripple.task.engine.ProcessEngine
 import com.ripple.task.task.impl.ProcessTaskImpl
+import com.ripple.task.util.RippleTaskCoroutineScope
 import com.ripple.tool.kttypelians.PairLambda
 import com.ripple.tool.kttypelians.SuccessLambda
 
@@ -14,6 +15,11 @@ import com.ripple.tool.kttypelians.SuccessLambda
  * Email: fanyafeng@live.cn
  * Description:
  */
+
+/**
+ * 获取协程对象
+ */
+fun rippleTaskCoroutineScope() = RippleTaskCoroutineScope.getInstance()
 
 /**
  * 内部维持一个单线程队列

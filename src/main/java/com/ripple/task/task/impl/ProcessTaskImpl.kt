@@ -10,9 +10,12 @@ import com.ripple.task.callback.result.OnAllResult
 import com.ripple.task.callback.result.OnItemResult
 import com.ripple.task.config.ProcessModel
 import com.ripple.task.engine.ProcessEngine
+import com.ripple.task.extend.rippleTaskCoroutineScope
 import com.ripple.task.task.ProcessAllResultTask
 import com.ripple.task.task.ProcessItemResultTask
 import com.ripple.task.task.ProcessTask
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.ExecutorService
@@ -162,6 +165,11 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
 
                         override fun onItemStart(startResult: ProcessModel<S, T>) {
                             super.onItemStart(startResult)
+
+//                            rippleTaskCoroutineScope().launch(Dispatchers.Main) {
+//                                getItemResult()?.onItemStart(startResult)
+//                            }
+
                             bundle.putSerializable(ProcessModel.PROCESS_ITEM, startResult)
                             Message.obtain(handler, OnItemStart.CODE_ITEM_START, bundle)
                                 .sendToTarget()
