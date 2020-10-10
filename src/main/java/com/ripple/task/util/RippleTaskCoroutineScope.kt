@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit
  * Author: fanyafeng
  * Date: 2020/10/9 18:16
  * Email: fanyafeng@live.cn
- * Description:
+ * Description: RippleTask统一的协程对象
  */
-internal class RippleTaskCoroutineScope private constructor() {
+class RippleTaskCoroutineScope private constructor() {
     companion object {
 
         private const val MIN_PRIORITY_THREADS = Thread.MIN_PRIORITY
