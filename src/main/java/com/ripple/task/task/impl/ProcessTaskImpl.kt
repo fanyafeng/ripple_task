@@ -94,7 +94,7 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
                     override fun onStart() {
                         super.onStart()
                         rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                            getAllResult().onStart()
+                            this@ProcessTaskImpl.getAllResult()?.onStart()
                         }
                     }
 
@@ -105,14 +105,14 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
                     override fun onFailed(failedResult: List<ProcessModel<S, T>>?) {
                         super.onFailed(failedResult)
                         rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                            getAllResult().onFailed(failedResultList)
+                            this@ProcessTaskImpl.getAllResult()?.onFailed(failedResultList)
                         }
                     }
 
                     override fun onSuccess(successResult: List<ProcessModel<S, T>>?) {
                         super.onSuccess(successResult)
                         rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                            getAllResult().onSuccess(successResultList)
+                            this@ProcessTaskImpl.getAllResult()?.onSuccess(successResultList)
                         }
                     }
 
@@ -121,7 +121,7 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
                         unFinishResult: List<ProcessModel<S, T>>?
                     ) {
                         rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                            getAllResult().onFinish(successResultList,failedResultList)
+                            this@ProcessTaskImpl.getAllResult()?.onFinish(successResultList,failedResultList)
                         }
                         executorServiceInner?.shutdown()
                     }
@@ -150,7 +150,7 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
                             super.onItemStart(startResult)
 
                             rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                                getItemResult()?.onItemStart(startResult)
+                                this@ProcessTaskImpl.getItemResult()?.onItemStart(startResult)
                             }
                         }
 
@@ -158,8 +158,8 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
                             super.onItemDoing(doingResult)
 
                             rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                                getItemResult()?.onItemDoing(doingResult)
-                                getAllResult()?.onDoing(listOf(doingResult))
+                                this@ProcessTaskImpl.getItemResult()?.onItemDoing(doingResult)
+                                this@ProcessTaskImpl.getAllResult()?.onDoing(listOf(doingResult))
                             }
                         }
 
@@ -167,7 +167,7 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
                             super.onItemInterrupted(interruptedResult)
 
                             rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                                getItemResult()?.onItemInterrupted(interruptedResult)
+                                this@ProcessTaskImpl.getItemResult()?.onItemInterrupted(interruptedResult)
                             }
                         }
 
@@ -176,7 +176,7 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
 
                             failedResultList.add(failedResult)
                             rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                                getItemResult()?.onItemFailed(failedResult)
+                                this@ProcessTaskImpl.getItemResult()?.onItemFailed(failedResult)
                             }
                         }
 
@@ -185,14 +185,14 @@ class ProcessTaskImpl<S, T> @JvmOverloads constructor(
 
                             successResultList.add(successResult)
                             rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                                getItemResult()?.onItemSuccess(successResult)
+                                this@ProcessTaskImpl.getItemResult()?.onItemSuccess(successResult)
                             }
                         }
 
                         override fun onItemFinish(finishResult: ProcessModel<S, T>) {
 
                             rippleTaskCoroutineScope().launch(Dispatchers.Main) {
-                                getItemResult()?.onItemFinish(finishResult)
+                                this@ProcessTaskImpl.getItemResult()?.onItemFinish(finishResult)
                             }
                         }
                     }
